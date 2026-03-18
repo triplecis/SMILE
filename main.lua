@@ -37,93 +37,50 @@ _Player.CharacterAdded:Connect(function()
 end)
 
 local function setNoclip(state)
-
 	if not _LocalCharacter then return end
-
 	for _,v in pairs(_LocalCharacter:GetDescendants()) do
 		if v:IsA("BasePart") then
 			v.CanCollide = not state
 		end
 	end
-
 end
 
 local function startFly()
-
 	if flying then return end
 	flying = true
-
 	bodyVel = Instance.new("BodyVelocity")
-	bodyVel.MaxForce = Vector3.new(1e6,1e6,1e6)
-	bodyVel.Velocity = Vector3.zero
-	bodyVel.Parent = _LocalRoot
-
+	bodyVel.MaxForce, bodyVel.Velocity, bodyVel.Parent = Vector3.new(1e6,1e6,1e6), Vector3.zero, _LocalRoot
 	bodyGyro = Instance.new("BodyGyro")
-	bodyGyro.MaxTorque = Vector3.new(1e6,1e6,1e6)
-	bodyGyro.CFrame = _LocalRoot.CFrame
-	bodyGyro.Parent = _LocalRoot
-
+	bodyGyro.MaxTorque, bodyGyro.CFrame, bodyGyro.Parent = Vector3.new(1e6,1e6,1e6), _LocalRoot.CFrame, _LocalRoot
 	_LocalHumanoid.PlatformStand = true
-
 end
 
 local function stopFly()
-
 	flying = false
-
 	if bodyVel then bodyVel:Destroy() end
 	if bodyGyro then bodyGyro:Destroy() end
-
 	setNoclip(false)
-
 	_LocalHumanoid.PlatformStand = false
-
 end
 
 _RunService.RenderStepped:Connect(function()
-
 	if not flying or not _LocalRoot then return end
-
 	setNoclip(true)
-
 	local cam = _CurrentCamera
-	local moveDir = Vector3.zero
+	local UIS = _UserInputService
+	local isDown = function(k) return UIS:IsKeyDown(Enum.KeyCode[k]) end
 
-	if _UserInputService:IsKeyDown(Enum.KeyCode.W) then
-		moveDir += cam.CFrame.LookVector
-	end
+	local moveDir =
+		(isDown("W") and cam.CFrame.LookVector or Vector3.zero) +
+		(isDown("S") and -cam.CFrame.LookVector or Vector3.zero) +
+		(isDown("A") and -cam.CFrame.RightVector or Vector3.zero) +
+		(isDown("D") and cam.CFrame.RightVector or Vector3.zero) +
+		(isDown("Space") and Vector3.yAxis or Vector3.zero) +
+		(isDown("LeftShift") and -Vector3.yAxis or Vector3.zero)
 
-	if _UserInputService:IsKeyDown(Enum.KeyCode.S) then
-		moveDir -= cam.CFrame.LookVector
-	end
-
-	if _UserInputService:IsKeyDown(Enum.KeyCode.A) then
-		moveDir -= cam.CFrame.RightVector
-	end
-
-	if _UserInputService:IsKeyDown(Enum.KeyCode.D) then
-		moveDir += cam.CFrame.RightVector
-	end
-
-	if _UserInputService:IsKeyDown(Enum.KeyCode.Space) then
-		moveDir += Vector3.new(0,1,0)
-	end
-
-	if _UserInputService:IsKeyDown(Enum.KeyCode.LeftShift) then
-		moveDir -= Vector3.new(0,1,0)
-	end
-
-	local targetVel = Vector3.zero
-
-	if moveDir.Magnitude > 0 then
-		targetVel = (moveDir.Unit * speed)
-	end
-
-	velocity = velocity:Lerp(targetVel,0.2)
-
+	velocity = velocity:Lerp(moveDir.Magnitude > 0 and moveDir.Unit * speed or Vector3.zero, 0.2)
 	bodyVel.Velocity = velocity
 	bodyGyro.CFrame = cam.CFrame
-
 end)
 
 _UserInputService.JumpRequest:Connect(function()
