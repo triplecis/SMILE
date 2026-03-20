@@ -161,7 +161,7 @@ UniversalMovement:AddSlider('FlySpeed', {
 })
 
 UniversalMovement:AddLabel("Fly Keybind"):AddKeyPicker("FlyKey", {
-	Default = "E",
+	Default = "",
 	Mode = "Toggle",
 	Text = "Fly Key",
 
@@ -219,6 +219,21 @@ UniversalMovement:AddToggle('ClickTP', {
     Default = false,
 })
 
+UniversalMovement:AddDropdown('Playerslist', {
+    Text = 'Player List',
+    Values = function()
+        local list = {}
+        for _, v in pairs(_Players:GetPlayers()) do
+            if v ~= _Player then
+                table.insert(list, v.Name)
+            end
+        end
+        return list
+    end,
+    Multi = true,
+    Search = true,
+})
+
 UniversalUtilities:AddToggle('ESP', {
     Text = 'ESP',
     Default = false,
@@ -226,11 +241,7 @@ UniversalUtilities:AddToggle('ESP', {
 
 UniversalUtilities:AddToggle('Chams', {
     Text = 'Chams',
-    Callback = function()
-        local _Highlight = Instance.new("Highlight")
-        _Highlight.FillTransparency = 0.5
-        _Highlight.OutlineTransparency = 0
-    end
+    
 })
 
 UniversalUtilities:AddToggle('Tracers', {
