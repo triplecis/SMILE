@@ -73,8 +73,8 @@ local function stopFly()
     flying = false
     if bodyVel then bodyVel:Destroy() end
     if bodyGyro then bodyGyro:Destroy() end
-    setNoclip(false)
-    _LocalHumanoid.PlatformStand = false
+    if _LocalCharacter then setNoclip(false) end
+    if _LocalHumanoid then _LocalHumanoid.PlatformStand = false end
 end
 
 _RunService.RenderStepped:Connect(function()
