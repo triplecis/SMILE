@@ -83,6 +83,7 @@ end)
 
 --[[ Infinite Jump ]]--
 _UserInputService.JumpRequest:Connect(function()
+     if not Toggles or not Toggles.InfiniteJump then return end
     if Toggles.InfiniteJump.Value then
         _LocalHumanoid:ChangeState(Enum.HumanoidStateType.Jumping)
     end
@@ -90,6 +91,7 @@ end)
 
 --[[ Noclip ]]--
 _RunService.Stepped:Connect(function()
+    if not Toggles or not Toggles.Noclip then return end
     if Toggles.Noclip.Value and _LocalCharacter then
         for _, v in pairs(_LocalCharacter:GetDescendants()) do
             if v:IsA("BasePart") then
@@ -102,6 +104,7 @@ end)
 --[[ Click Teleport ]]--
 _UserInputService.InputBegan:Connect(function(input, gameProcessed)
     if gameProcessed then return end
+    if not Toggles or not Toggles.ClickTP then return end
     if _UserInputService:IsKeyDown(Enum.KeyCode.LeftControl) then
         if input.UserInputType == Enum.UserInputType.MouseButton1 and Toggles.ClickTP.Value and _LocalCharacter and _LocalRoot then
             _LocalRoot.CFrame = CFrame.new(_Mouse.Hit.Position)
