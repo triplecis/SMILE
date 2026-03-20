@@ -1,4 +1,3 @@
-print('SMILE Main launch at' .. os.date("%c"))
 local repo = 'https://raw.githubusercontent.com/violin-suzutsuki/LinoriaLib/main/'
 
 local Library = loadstring(game:HttpGet(repo .. 'Library.lua'))()
@@ -64,14 +63,6 @@ end
 
 ]]--
 --[[ Linoria ]]--
-
-MainLeftGroupBox:AddToggle('MyToggle', {
-    Text = 'Enable Feature',
-    Default = false,
-    Callback = function(Value)
-        print("Toggle:", Value)
-    end
-})
 
 SettingsMenu:AddLabel("Menu keybind"):AddKeyPicker("MenuKeybind", {
     Default = "RightControl",
