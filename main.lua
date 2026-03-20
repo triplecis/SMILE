@@ -35,11 +35,11 @@ local _Mouse = _Player:GetMouse()
 
 local executor = identifyexecutor()
 
-local placeID = game.PlaceId
-local jobID = game.JobId
-local universeID = game.GameId
+local PlaceId = game.PlaceId
+local JobId = game.JobId
+local GameId = game.GameId
 
---[[local GameModules = {
+local GameModules = {
     [12196278347] = 'https://raw.githubusercontent.com/triplecis/SMILE/refs/heads/main/refinerycaves2.lua', -- Refinery Caves 2
     [192800] = 'https://raw.githubusercontent.com/triplecis/SMILE/refs/heads/main/workatapizzaplace.lua', -- Work at a Pizza Place
     [5523851880] = 'https://raw.githubusercontent.com/triplecis/SMILE/refs/heads/main/8ballpoolclassic.lua', -- 8 Ball Pool Classic
@@ -61,7 +61,7 @@ else
     print('No specific module for this game, universal only.')
 end
 
-]]--
+
 --[[ Linoria ]]--
 
 SettingsMenu:AddLabel("Menu keybind"):AddKeyPicker("MenuKeybind", {
