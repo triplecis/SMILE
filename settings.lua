@@ -23,7 +23,7 @@ end)
 --[[ Themes and Configs ]]--
 _Linoria.ThemeManager:SetLibrary(_Linoria.Library)
 _Linoria.ThemeManager:SetFolder('SMILE/themes')
-_Linoria.ThemeManager:ApplyToGroupbox(_Tabs.Settings:AddRightGroupbox('Themes'))
+_Linoria.ThemeManager:ApplyToTab(_Tabs.Settings)
 
 _Linoria.SaveManager:SetLibrary(_Linoria.Library)
 _Linoria.SaveManager:IgnoreThemeSettings()
