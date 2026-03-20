@@ -72,10 +72,10 @@ local GameModules = {
 
 --[[ Functions ]]--
 local function loadModule(url)
-    local success, err = pcall(function()
-        loadstring(game:HttpGet(url))()
+    local ok, err = pcall(function()
+        loadstring(game:HttpGet(url .. '?t=' .. os.time()))()
     end)
-    if not success then
+    if not ok then
         warn('Failed to load: ' .. url .. '\n' .. err)
     end
 end
