@@ -221,6 +221,7 @@ UniversalMovement:AddToggle('ClickTP', {
 
 UniversalMovement:AddDropdown('Playerslist', {
     Text = 'Player List',
+    Default = 0,
     Values = function()
         local list = {}
         for _, v in pairs(_Players:GetPlayers()) do
@@ -230,8 +231,7 @@ UniversalMovement:AddDropdown('Playerslist', {
         end
         return list
     end,
-    Multi = true,
-    Search = true,
+    Multi = false,
 })
 
 UniversalUtilities:AddToggle('ESP', {
