@@ -1,6 +1,8 @@
+print("SMILE - " .. identifyexecutor() .. " - " .. os.date("%c").. " - []" .. game.PlaceId.. "] - " .. game:GetService("MarketplaceService"):GetProductInfo(game.PlaceId).Name) 
+
 -- Nothing Yet
 
---[[
+--[[ Notes
 
 This will take forever. (139 Minigames)
 🕹️ (Controller) Bombs Away • Bowling Bustle • Disc of Doom • Hide Hunt • High Pressure • Juggernaut • Laser Guidance • Orbit Snatcher • Platform Peril • Pyre Pit • Romper Stomper • Sharkbait • Solo Swordsman • Spiky Spinner

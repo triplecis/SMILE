@@ -1,6 +1,8 @@
+print("SMILE - " .. identifyexecutor() .. " - " .. os.date("%c").. " - []" .. game.PlaceId.. "] - " .. game:GetService("MarketplaceService"):GetProductInfo(game.PlaceId).Name) 
+
 -- Nothing Yet
 
---[[ Notes.
+--[[ Notes
 
 workspace.Live
 Stores all players, as long as they're in the distance of the local player
