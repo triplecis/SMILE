@@ -123,7 +123,6 @@ local function stopVehicleFly()
     vehicleVelocity = Vector3.zero
 end
 
--- Detect seat changes
 _Player.CharacterAdded:Connect(function(char)
     char:WaitForChild("Humanoid").Seated:Connect(function(isSeated, seat)
         if isSeated and seat:IsA("VehicleSeat") then
@@ -146,7 +145,6 @@ if _LocalCharacter then
     end)
 end
 
--- Vehicle fly loop
 _RunService.RenderStepped:Connect(function()
     if not vehicleFlying then return end
     local root = getVehicleRoot()
