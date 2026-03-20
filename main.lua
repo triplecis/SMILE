@@ -87,6 +87,5 @@ loadModule('https://raw.githubusercontent.com/triplecis/SMILE/refs/heads/main/ch
 if GameModules[PlaceId] then
     loadModule(GameModules[PlaceId])
 else
-    _Tabs.Game:SetVisible(false)
     print('No specific module for this game, universal only.')
 end
