@@ -238,7 +238,9 @@ UniversalMovement:AddDropdown('Playerlist', {
     Multi = false,
 })
 
-UniversalMovement:AddButton('Teleport to Player', function()
+UniversalMovement:AddButton('Teleport to Player', {
+    Name = 'TP to Player',
+    Callback = function()
     local targetName = Options.Playerlist.Value
     if not targetName or targetName == "" then return end
 
@@ -250,7 +252,8 @@ UniversalMovement:AddButton('Teleport to Player', function()
     if hrp then
         _LocalRoot.CFrame = hrp.CFrame + hrp.CFrame.LookVector * 3
     end
-end)
+end
+})
 
 UniversalUtilities:AddToggle('ESP', {
     Text = 'ESP',
