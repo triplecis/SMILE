@@ -1,23 +1,23 @@
 print('Executed SMILE at ' .. os.date('%X'))
 
 --[[ Services ]]--
-local _Players = game:GetService("Players")
-local _RunService = game:GetService("RunService")
-local _UserInputService = game:GetService("UserInputService")
-local _TweenService = game:GetService("TweenService")
-local _HttpService = game:GetService("HttpService")
-local _ReplicatedStorage = game:GetService("ReplicatedStorage")
-local _SoundService = game:GetService("SoundService")
-local _PathfindingService = game:GetService("PathfindingService")
-local _VirtualInputManager = game:GetService("VirtualInputManager")
-local _ContextActionService = game:GetService("ContextActionService")
+_Players = game:GetService("Players")
+_RunService = game:GetService("RunService")
+_UserInputService = game:GetService("UserInputService")
+_TweenService = game:GetService("TweenService")
+_HttpService = game:GetService("HttpService")
+_ReplicatedStorage = game:GetService("ReplicatedStorage")
+_SoundService = game:GetService("SoundService")
+_PathfindingService = game:GetService("PathfindingService")
+_VirtualInputManager = game:GetService("VirtualInputManager")
+_ContextActionService = game:GetService("ContextActionService")
 
-local _CurrentCamera = workspace.CurrentCamera
-local _Player = _Players.LocalPlayer
-local _LocalCharacter = _Player.Character or _Player.CharacterAdded:Wait()
-local _LocalHumanoid = _LocalCharacter:WaitForChild("Humanoid")
-local _LocalRoot = _LocalCharacter:WaitForChild("HumanoidRootPart")
-local _Mouse = _Player:GetMouse()
+_CurrentCamera = workspace.CurrentCamera
+_Player = _Players.LocalPlayer
+_LocalCharacter = _Player.Character or _Player.CharacterAdded:Wait()
+_LocalHumanoid = _LocalCharacter:WaitForChild("Humanoid")
+_LocalRoot = _LocalCharacter:WaitForChild("HumanoidRootPart")
+_Mouse = _Player:GetMouse()
 
 --[[ Executor / Game Info ]]--
 local Executor = identifyexecutor and identifyexecutor() or "Unknown"
@@ -83,6 +83,7 @@ else
     _Tabs.Game:SetVisible(false)
     print('No specific module for this game, universal only.')
 end
+
 print('If 2 [table] then Theme and Save Manager work')
 print(type(_Linoria.ThemeManager)) 
 print(type(_Linoria.SaveManager))
