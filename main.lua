@@ -1,24 +1,4 @@
 print('Executed SMILE at ' .. os.date('%X'))
-_Linoria = {
-    Library = loadstring(game:HttpGet('https://raw.githubusercontent.com/violin-suzutsuki/LinoriaLib/main/Library.lua'))(),
-    ThemeManager = loadstring(game:HttpGet('https://raw.githubusercontent.com/violin-suzutsuki/LinoriaLib/main/addons/ThemeManager.lua'))(),
-    SaveManager = loadstring(game:HttpGet('https://raw.githubusercontent.com/violin-suzutsuki/LinoriaLib/main/addons/SaveManager.lua'))(),
-}
-
-_Window = Library:CreateWindow({
-    Title = 'SMILE',
-    Center = true,
-    AutoShow = true,
-})
-
-_Tabs = {
-    Main = _Window:AddTab('Main'),
-    Game = _Window:AddTab('Game'),
-    Universal = _Window:AddTab('Universal'),
-    Settings = _Window:AddTab('Settings'),
-}
-
-local MainLeftGroupBox = _Tabs.Main:AddLeftGroupbox('Example')
 
 --[[ Services ]]--
 local _Players = game:GetService("Players")
@@ -39,12 +19,41 @@ local _LocalHumanoid = _LocalCharacter.Humanoid
 local _LocalRoot = _LocalCharacter.HumanoidRootPart
 local _Mouse = _Player:GetMouse()
 
---[[ Code ]]--
-local Executor = identifyexecutor()
+--[[ Executor / Game Info ]]--
+local Executor = identifyexecutor and identifyexecutor() or "Unknown"
 local PlaceId = game.PlaceId
 local JobId = game.JobId
 local GameId = game.GameId
 
+--[[ Linoria ]]--
+_Linoria = {
+    Library = loadstring(game:HttpGet('https://raw.githubusercontent.com/violin-suzutsuki/LinoriaLib/main/Library.lua'))(),
+    ThemeManager = loadstring(game:HttpGet('https://raw.githubusercontent.com/violin-suzutsuki/LinoriaLib/main/addons/ThemeManager.lua'))(),
+    SaveManager = loadstring(game:HttpGet('https://raw.githubusercontent.com/violin-suzutsuki/LinoriaLib/main/addons/SaveManager.lua'))(),
+}
+
+_Window = _Linoria.Library:CreateWindow({
+    Title = 'SMILE',
+    Center = true,
+    AutoShow = true,
+})
+
+local MarketplaceService = game:GetService("MarketplaceService")
+local success, info = pcall(function() return MarketplaceService:GetProductInfo(PlaceId) end)
+local gameName = success and info.Name:sub(1, 12) or "Game"
+
+_Tabs = {
+    Main = _Window:AddTab('Main'),
+    Game = _Window:AddTab(gameName),
+    Universal = _Window:AddTab('Universal'),
+    Settings = _Window:AddTab('Settings'),
+}
+
+--[[ Linoria UI ]]--
+local MainLeftGroupBox = _Tabs.Main:AddLeftGroupbox('Example')
+
+
+--[[ Game Modules ]]--
 local GameModules = {
     [12196278347] = 'https://raw.githubusercontent.com/triplecis/SMILE/refs/heads/main/refinerycaves2.lua', -- Refinery Caves 2
     [192800] = 'https://raw.githubusercontent.com/triplecis/SMILE/refs/heads/main/workatapizzaplace.lua', -- Work at a Pizza Place
@@ -57,14 +66,20 @@ local GameModules = {
 
 --[[ Functions ]]--
 local function loadModule(url)
-    loadstring(game:HttpGet(url))()
-end
-
-if GameModules[PlaceId] then
-    loadModule(GameModules[PlaceId])
-else
-    print('No specific module for this game, universal only.')
+    local success, err = pcall(function()
+        loadstring(game:HttpGet(url))()
+    end)
+    if not success then
+        warn('Failed to load: ' .. url .. '\n' .. err)
+    end
 end
 
 loadModule('https://raw.githubusercontent.com/triplecis/SMILE/refs/heads/main/universal.lua')
 loadModule('https://raw.githubusercontent.com/triplecis/SMILE/refs/heads/main/settings.lua')
+
+if GameModules[PlaceId] then
+    loadModule(GameModules[PlaceId])
+else
+    _Tabs.Game:SetVisible(false)
+    print('No specific module for this game, universal only.')
+end
