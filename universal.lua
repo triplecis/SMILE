@@ -1,3 +1,6 @@
+print('Universal module loaded')
+
+--[[ Linoria ]]--
 local UniversalMovement = _Tabs.Universal:AddLeftGroupbox('Movement')
 local UniversalUtilities = _Tabs.Universal:AddLeftGroupbox('Utilities')
 local UniversalCamera = _Tabs.Universal:AddLeftGroupbox('Camera')
@@ -5,7 +8,6 @@ local UniversalWorld = _Tabs.Universal:AddRightGroupbox('World')
 local UniversalRender = _Tabs.Universal:AddRightGroupbox('Render')
 
 --[[ Services ]]--
-
 local _RunService = game:GetService("RunService")
 local _UserInputService = game:GetService("UserInputService")
 local _Players = game:GetService("Players")
@@ -17,7 +19,6 @@ local _CurrentCamera = workspace.CurrentCamera
 local _Mouse = _Player:GetMouse()
 
 --[[ Functions / Code ]]--
-
 local flying = false
 local speed = 60
 local velocity = Vector3.zero
@@ -31,7 +32,6 @@ local NametagObjects = {}
 local HealthbarObjects = {}
 
 --[[ Noclip Fly ]]--
-
 local function getChar()
 	_LocalCharacter = _Player.Character or _Player.CharacterAdded:Wait()
 	_LocalHumanoid = _LocalCharacter:WaitForChild("Humanoid")
@@ -520,7 +520,7 @@ local function createHealthbar(player)
     end)
 end
 
---[[ Linoria ]]--
+--[[ Linoria UI ]]--
 
 UniversalMovement:AddToggle('FlyToggle', {
     Text = 'Flight',

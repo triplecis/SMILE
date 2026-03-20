@@ -1,8 +1,13 @@
+print('Settings module loaded')
+
+--[[ Linoria ]]--
 local SettingsMenu = _Tabs.Settings:AddLeftGroupbox('Menu')
 local SettingsThemes = _Tabs.Settings:AddRightGroupbox('Themes')
 local SettingsConfigs = _Tabs.Settings:AddRightGroupbox('Configs')
 local SettingsDiscord = _Tabs.Settings:AddRightGroupbox('Discord')
 
+
+--[[ Linoria UI]]
 SettingsMenu:AddLabel("Menu keybind"):AddKeyPicker("MenuKeybind", {
     Default = "RightControl",
     NoUI = true,

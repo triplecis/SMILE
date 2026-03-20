@@ -21,7 +21,6 @@ _Tabs = {
 local MainLeftGroupBox = _Tabs.Main:AddLeftGroupbox('Example')
 
 --[[ Services ]]--
-
 local _Players = game:GetService("Players")
 local _Player = _Players.LocalPlayer
 local _LocalCharacter = _Player.Character
@@ -32,8 +31,8 @@ local _RunService = game:GetService("RunService")
 local _CurrentCamera = workspace.CurrentCamera
 local _Mouse = _Player:GetMouse()
 
-local executor = identifyexecutor()
-
+--[[ Code ]]--
+local Executor = identifyexecutor()
 local PlaceId = game.PlaceId
 local JobId = game.JobId
 local GameId = game.GameId
@@ -48,6 +47,7 @@ local GameModules = {
     [6722921118] = 'https://raw.githubusercontent.com/triplecis/SMILE/refs/heads/main/colorbook.lua', -- Color Book
 }
 
+--[[ Functions ]]--
 local function loadModule(url)
     loadstring(game:HttpGet(url))()
 end
