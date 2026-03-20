@@ -14,6 +14,8 @@ local velocity = Vector3.zero
 local bodyVel
 local bodyGyro
 
+local UIReady = false
+
 local ESPObjects = {}
 local ChamsObjects = {}
 local TracerObjects = {}
@@ -81,17 +83,9 @@ _RunService.RenderStepped:Connect(function()
     bodyGyro.CFrame = cam.CFrame
 end)
 
---[[ Infinite Jump ]]--
-_UserInputService.JumpRequest:Connect(function()
-     if not Toggles or not Toggles.InfiniteJump then return end
-    if Toggles.InfiniteJump.Value then
-        _LocalHumanoid:ChangeState(Enum.HumanoidStateType.Jumping)
-    end
-end)
-
 --[[ Noclip ]]--
 _RunService.Stepped:Connect(function()
-    if not Toggles or not Toggles.Noclip then return end
+    if not UIReady then return end
     if Toggles.Noclip.Value and _LocalCharacter then
         for _, v in pairs(_LocalCharacter:GetDescendants()) do
             if v:IsA("BasePart") then
@@ -101,10 +95,17 @@ _RunService.Stepped:Connect(function()
     end
 end)
 
+--[[ Infinite Jump ]]--
+_UserInputService.JumpRequest:Connect(function()
+    if not UIReady then return end
+    if Toggles.InfiniteJump.Value then
+        _LocalHumanoid:ChangeState(Enum.HumanoidStateType.Jumping)
+    end
+end)
+
 --[[ Click Teleport ]]--
 _UserInputService.InputBegan:Connect(function(input, gameProcessed)
-    if gameProcessed then return end
-    if not Toggles or not Toggles.ClickTP then return end
+    if gameProcessed or not UIReady then return end
     if _UserInputService:IsKeyDown(Enum.KeyCode.LeftControl) then
         if input.UserInputType == Enum.UserInputType.MouseButton1 and Toggles.ClickTP.Value and _LocalCharacter and _LocalRoot then
             _LocalRoot.CFrame = CFrame.new(_Mouse.Hit.Position)
@@ -723,6 +724,7 @@ _Players.PlayerRemoving:Connect(function()
     PlayerDropdown:SetValues(getPlayerList())
 end)
 
+UIReady = true
 task.delay(1, function()
     PlayerDropdown:SetValues(getPlayerList())
 end)
