@@ -21,6 +21,12 @@ local vehicleBodyVel
 local vehicleBodyGyro
 local currentSeat
 
+local platformPart = nil
+local platformActive = false
+local platformConnection
+local platformHeight = -3
+local platformSpeed = 0.2
+
 local UIReady = false
 
 local ESPObjects = {}
@@ -188,6 +194,68 @@ _UserInputService.JumpRequest:Connect(function()
     if Toggles.InfiniteJump.Value then
         _LocalHumanoid:ChangeState(Enum.HumanoidStateType.Jumping)
     end
+end)
+
+--[[ Platform ]]--
+local function createPlatform()
+    if platformPart then return end
+    local root = _LocalRoot
+    if not root then return end
+
+    platformPart = Instance.new("Part")
+    platformPart.Size = Vector3.new(6, 0.5, 6)
+    platformPart.Anchored = false
+    platformPart.CanCollide = true
+    platformPart.BrickColor = BrickColor.new("Medium stone grey")
+    platformPart.Material = Enum.Material.SmoothPlastic
+    platformPart.CastShadow = false
+    platformPart.Name = "SMILEPlatform"
+    platformPart.Parent = _LocalCharacter  -- parented to character
+
+    -- Weld it to the root so it follows automatically
+    local weld = Instance.new("WeldConstraint")
+    weld.Part0 = root
+    weld.Part1 = platformPart
+    weld.Parent = platformPart
+
+    -- Set initial offset below player
+    platformPart.CFrame = root.CFrame * CFrame.new(0, platformHeight, 0)
+
+    platformConnection = _RunService.RenderStepped:Connect(function()
+        if not platformActive or not root or not root.Parent then
+            destroyPlatform()
+            return
+        end
+
+        -- Q and E adjust the weld offset by moving the part
+        if _UserInputService:IsKeyDown(Enum.KeyCode.E) then
+            platformHeight = platformHeight + platformSpeed
+            platformPart.CFrame = root.CFrame * CFrame.new(0, platformHeight, 0)
+        end
+        if _UserInputService:IsKeyDown(Enum.KeyCode.Q) then
+            platformHeight = platformHeight - platformSpeed
+            platformPart.CFrame = root.CFrame * CFrame.new(0, platformHeight, 0)
+        end
+    end)
+end
+
+local function destroyPlatform()
+    platformActive = false
+    platformHeight = -3
+    if platformConnection then
+        platformConnection:Disconnect()
+        platformConnection = nil
+    end
+    if platformPart then
+        platformPart:Destroy()
+        platformPart = nil
+    end
+end
+
+_Player.CharacterAdded:Connect(function(char)
+    destroyPlatform()
+    _LocalHumanoid = char:WaitForChild("Humanoid")
+    _LocalRoot = char:WaitForChild("HumanoidRootPart")
 end)
 
 --[[ Click Teleport ]]--
@@ -698,6 +766,46 @@ end
 UniversalMovement:AddToggle('InfiniteJump', {
     Text = 'Infinite Jump',
     Default = false
+})
+
+UniversalMovement:AddToggle('Platform', {
+    Text = 'Platform',
+    Tooltip = 'Q = Down, E = Up',
+    Default = false,
+    Callback = function(value)
+        if value then
+            platformActive = true
+            createPlatform()
+        else
+            destroyPlatform()
+        end
+    end
+})
+
+UniversalMovement:AddSlider('PlatformSize', {
+    Text = 'Platform Size',
+    Default = 6,
+    Min = 2,
+    Max = 20,
+    Rounding = 0,
+    Compact = true,
+    Callback = function(value)
+        if platformPart then
+            platformPart.Size = Vector3.new(value, 0.5, value)
+        end
+    end
+})
+
+UniversalMovement:AddSlider('PlatformSpeed', {
+    Text = 'Platform Speed',
+    Default = 2,
+    Min = 1,
+    Max = 20,
+    Rounding = 1,
+    Compact = true,
+    Callback = function(value)
+        platformSpeed = value / 10
+    end
 })
 
 UniversalMovement:AddToggle('Noclip', {

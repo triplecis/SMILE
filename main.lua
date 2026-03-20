@@ -48,18 +48,6 @@ local MarketplaceService = game:GetService("MarketplaceService")
 local success, info = pcall(function() return MarketplaceService:GetProductInfo(PlaceId) end)
 local gameName = success and info.Name:sub(1, 12) or "Game"
 
-_Tabs = {
-    Main = _Window:AddTab('Main'),
-    Game = _Window:AddTab(gameName),
-    Universal = _Window:AddTab('Universal'),
-    Settings = _Window:AddTab('Settings'),
-}
-
---[[ Linoria UI ]]--
-local MainLeftGroupBox = _Tabs.Main:AddLeftGroupbox('Example')
-
-
---[[ Game Modules ]]--
 local GameModules = {
     [12196278347] = 'https://raw.githubusercontent.com/triplecis/SMILE/refs/heads/main/refinerycaves2.lua', -- Refinery Caves 2
     [192800] = 'https://raw.githubusercontent.com/triplecis/SMILE/refs/heads/main/workatapizzaplace.lua', -- Work at a Pizza Place
@@ -69,6 +57,18 @@ local GameModules = {
     [277751860] = 'https://raw.githubusercontent.com/triplecis/SMILE/refs/heads/main/epicminigames.lua', -- Epic Minigames
     [6722921118] = 'https://raw.githubusercontent.com/triplecis/SMILE/refs/heads/main/colorbook.lua', -- Color Book
 }
+
+local hasGameModule = GameModules[PlaceId] ~= nil
+
+_Tabs = {
+    Main = _Window:AddTab('Main'),
+    Game = hasGameModule and _Window:AddTab(gameName) or nil,
+    Universal = _Window:AddTab('Universal'),
+    Settings = _Window:AddTab('Settings'),
+}
+
+--[[ Linoria UI ]]--
+local MainLeftGroupBox = _Tabs.Main:AddLeftGroupbox('Example')
 
 --[[ Functions ]]--
 local function loadModule(url)
