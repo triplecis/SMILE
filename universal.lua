@@ -1,5 +1,3 @@
-local UniversalTab = _Tabs.Universal:AddTab('Universal')
-
 local UniversalMovement = _Tabs.Universal:AddLeftGroupbox('Movement')
 local UniversalUtilities = _Tabs.Universal:AddLeftGroupbox('Utilities')
 local UniversalCamera = _Tabs.Universal:AddLeftGroupbox('Camera')
