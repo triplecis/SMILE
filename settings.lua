@@ -11,8 +11,6 @@ SettingsMenu:AddLabel("Menu keybind"):AddKeyPicker("MenuKeybind", {
     Text = "Toggle UI",
 })
 
-_Linoria.Library.ToggleKeybind = Options.MenuKeybind
-
 SettingsMenu:AddButton('Close UI', function()
     _Linoria.Library:Unload()
 end)
@@ -25,3 +23,5 @@ end)
 --[[ Themes and Configs ]]--
 _Linoria.ThemeManager:BuildThemeSection(_Tabs.Settings:AddRightGroupbox('Themes'))
 _Linoria.SaveManager:BuildConfigSection(_Tabs.Settings:AddRightGroupbox('Configs'))
+
+_Linoria.Library.ToggleKeybind = Options.MenuKeybind

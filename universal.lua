@@ -678,6 +678,7 @@ UniversalUtilities:AddToggle('Healthbars', {
 local PlayerDropdown = UniversalUtilities:AddDropdown('Playerlist', {
     Text = 'Player List',
     Default = nil,
+    AllowNull = true,
     Values = getPlayerList(),
     Multi = false,
 })

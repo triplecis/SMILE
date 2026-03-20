@@ -32,6 +32,12 @@ _Linoria = {
     SaveManager = loadstring(game:HttpGet('https://raw.githubusercontent.com/violin-suzutsuki/LinoriaLib/main/addons/SaveManager.lua'))(),
 }
 
+_Linoria.ThemeManager:SetLibrary(_Linoria.Library)
+_Linoria.SaveManager:SetLibrary(_Linoria.Library)
+_Linoria.SaveManager:IgnoreThemeSettings()
+_Linoria.ThemeManager:SetFolder('SMILE/themes')
+_Linoria.SaveManager:SetFolder('SMILE/configs')
+
 _Window = _Linoria.Library:CreateWindow({
     Title = 'SMILE',
     Center = true,
@@ -83,14 +89,3 @@ else
     _Tabs.Game:SetVisible(false)
     print('No specific module for this game, universal only.')
 end
-
-print('If 2 [table] then Theme and Save Manager work')
-print(type(_Linoria.ThemeManager)) 
-print(type(_Linoria.SaveManager))
-print('...')
-
-_Linoria.ThemeManager:SetLibrary(_Linoria.Library)
-_Linoria.SaveManager:SetLibrary(_Linoria.Library)
-_Linoria.SaveManager:IgnoreThemeSettings()
-_Linoria.ThemeManager:SetFolder('SMILE/themes')
-_Linoria.SaveManager:SetFolder('SMILE/configs')
