@@ -1,25 +1,27 @@
-local repo = 'https://raw.githubusercontent.com/violin-suzutsuki/LinoriaLib/main/'
+_Linoria = {
+    Library = loadstring(game:HttpGet('https://raw.githubusercontent.com/violin-suzutsuki/LinoriaLib/main/Library.lua'))(),
+    ThemeManager = loadstring(game:HttpGet('https://raw.githubusercontent.com/violin-suzutsuki/LinoriaLib/main/addons/ThemeManager.lua'))(),
+    SaveManager = loadstring(game:HttpGet('https://raw.githubusercontent.com/violin-suzutsuki/LinoriaLib/main/addons/SaveManager.lua'))(),
+}
 
-local Library = loadstring(game:HttpGet(repo .. 'Library.lua'))()
-local ThemeManager = loadstring(game:HttpGet(repo .. 'addons/ThemeManager.lua'))()
-local SaveManager = loadstring(game:HttpGet(repo .. 'addons/SaveManager.lua'))()
 
-local Window = Library:CreateWindow({
+_Window = Library:CreateWindow({
     Title = 'SMILE',
     Center = true,
     AutoShow = true
 })
 
-local Tabs = {
-    Main = Window:AddTab('Main'),
-    Settings = Window:AddTab('Settings')
+_Tabs = {
+    Main = _Window:AddTab('Main'),
+    Universal = _Window:AddTab('Universal'),
+    Settings = _Window:AddTab('Settings')
 }
 
-local MainLeftGroupBox = Tabs.Main:AddLeftGroupbox('Example')
-local SettingsMenu = Tabs.Settings:AddLeftGroupbox('Menu')
-local SettingsThemes = Tabs.Settings:AddRightGroupbox('Themes')
-local SettingsConfigs = Tabs.Settings:AddRightGroupbox('Configs')
-local SettingsDiscord = Tabs.Settings:AddRightGroupbox('Discord')
+local MainLeftGroupBox = _Tabs.Main:AddLeftGroupbox('Example')
+local SettingsMenu = _Tabs.Settings:AddLeftGroupbox('Menu')
+local SettingsThemes = _Tabs.Settings:AddRightGroupbox('Themes')
+local SettingsConfigs = _Tabs.Settings:AddRightGroupbox('Configs')
+local SettingsDiscord = _Tabs.Settings:AddRightGroupbox('Discord')
 
 --[[ Services ]]--
 
@@ -69,12 +71,12 @@ SettingsMenu:AddLabel("Menu keybind"):AddKeyPicker("MenuKeybind", {
     NoUI = true,
     Text = "Toggle UI",
     Callback = function()
-        Library.ToggleKeybind = Options.MenuKeybind.Value
+        _Linoria.Library.ToggleKeybind = Options.MenuKeybind.Value
     end
 })
 
 SettingsMenu:AddButton('Close UI', function()
-    Library:Unload()   
+    _Linoria.Library:Unload()   
 end)
 
 SettingsThemes:AddLabel('Placeholder')

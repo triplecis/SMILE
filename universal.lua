@@ -1,10 +1,10 @@
-local UniversalTab = Window:AddTab('Universal')
+local UniversalTab = _Tabs.Universal:AddTab('Universal')
 
-local UniversalMovement = Tabs.Universal:AddLeftGroupbox('Movement')
-local UniversalUtilities = Tabs.Universal:AddLeftGroupbox('Utilities')
-local UniversalCamera = Tabs.Universal:AddLeftGroupbox('Camera')
-local UniversalWorld = Tabs.Universal:AddRightGroupbox('World')
-local UniversalRender = Tabs.Universal:AddRightGroupbox('Render')
+local UniversalMovement = _Tabs.Universal:AddLeftGroupbox('Movement')
+local UniversalUtilities = _Tabs.Universal:AddLeftGroupbox('Utilities')
+local UniversalCamera = _Tabs.Universal:AddLeftGroupbox('Camera')
+local UniversalWorld = _Tabs.Universal:AddRightGroupbox('World')
+local UniversalRender = _Tabs.Universal:AddRightGroupbox('Render')
 
 --[[ Services ]]--
 
