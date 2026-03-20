@@ -14,9 +14,9 @@ local _ContextActionService = game:GetService("ContextActionService")
 
 local _CurrentCamera = workspace.CurrentCamera
 local _Player = _Players.LocalPlayer
-local _LocalCharacter = _Player.Character
-local _LocalHumanoid = _LocalCharacter.Humanoid
-local _LocalRoot = _LocalCharacter.HumanoidRootPart
+local _LocalCharacter = _Player.Character or _Player.CharacterAdded:Wait()
+local _LocalHumanoid = _LocalCharacter:WaitForChild("Humanoid")
+local _LocalRoot = _LocalCharacter:WaitForChild("HumanoidRootPart")
 local _Mouse = _Player:GetMouse()
 
 --[[ Executor / Game Info ]]--
