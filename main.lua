@@ -63,6 +63,16 @@ local function stopFly()
 	_LocalHumanoid.PlatformStand = false
 end
 
+local function getPlayerList()
+    local list = {}
+    for _, v in pairs(_Players:GetPlayers()) do
+        if v ~= _Player then
+            table.insert(list, v.Name)
+        end
+    end
+    return list
+end
+
 _RunService.RenderStepped:Connect(function()
 	if not flying or not _LocalRoot then return end
 	setNoclip(true)
@@ -107,6 +117,8 @@ _UserInputService.InputBegan:Connect(function(input, gameProcessed)
         end
     end
 end)
+
+
 
 local Window = Library:CreateWindow({
     Title = 'Linoria UI Example',
@@ -219,20 +231,22 @@ UniversalMovement:AddToggle('ClickTP', {
     Default = false,
 })
 
-UniversalMovement:AddDropdown('Playerslist', {
+UniversalMovement:AddDropdown('Playerlist', {
     Text = 'Player List',
-    Default = 0,
-    Values = function()
-        local list = {}
-        for _, v in pairs(_Players:GetPlayers()) do
-            if v ~= _Player then
-                table.insert(list, v.Name)
-            end
-        end
-        return list
-    end,
+    Default = nil,
+    Values = getPlayerList(),
     Multi = false,
 })
+
+UniversalMovement:AddButton('Teleport to Player', function()
+    local targetName = Options.Playerlist.Value
+    if not targetName then return end
+
+    local targetPlayer = _Players:FindFirstChild(targetName)
+    if targetPlayer and targetPlayer.Character and targetPlayer.Character:FindFirstChild("HumanoidRootPart") then
+        _LocalRoot.CFrame = targetPlayer.Character.HumanoidRootPart.CFrame
+    end
+end)
 
 UniversalUtilities:AddToggle('ESP', {
     Text = 'ESP',
@@ -271,4 +285,13 @@ SettingsConfigs:AddLabel('Placeholder')
 
 SettingsDiscord:AddButton("Copy Discord", function()
     setclipboard("discord.gg/yPeD8tx2Vq")
+end)
+
+
+_Players.PlayerAdded:Connect(function()
+    PlayerDropdown:SetValues(getPlayerList())
+end)
+
+_Players.PlayerRemoving:Connect(function()
+    PlayerDropdown:SetValues(getPlayerList())
 end)
