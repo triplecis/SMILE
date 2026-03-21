@@ -277,7 +277,7 @@ end)
 --[[ Click Teleport ]]--
 _UserInputService.InputBegan:Connect(function(input, gameProcessed)
     if gameProcessed or not UIReady then return end
-    if _UserInputService:IsKeyDown(Enum.KeyCode.LeftControl) then
+    if _UserInputService:IsKeyDown(Enum.KeyCode.LeftShift) then -- Click TP Keybind
         if input.UserInputType == Enum.UserInputType.MouseButton1 and Toggles.ClickTP.Value and _LocalCharacter and _LocalRoot then
             _LocalRoot.CFrame = CFrame.new(_Mouse.Hit.Position)
         end
@@ -831,7 +831,7 @@ UniversalMovement:AddToggle('Noclip', {
 
 UniversalMovement:AddToggle('ClickTP', {
     Text = 'Click TP',
-    Tooltip = 'Left Control + Left Click',
+    Tooltip = 'Left Shift + Left Click',
     Default = false
 })
 
