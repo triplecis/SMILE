@@ -201,8 +201,7 @@ _UserInputService.JumpRequest:Connect(function()
 end)
 
 --[[ Platform ]]--
-The issue is the WeldConstraint doesn't respect the offset — it just locks the parts together at their current positions. Use a Motor6D or just ditch the weld and manually position it every frame properly:
-lualocal function createPlatform()
+local function createPlatform()
     if platformPart then return end
     local root = _LocalRoot
     if not root then return end
