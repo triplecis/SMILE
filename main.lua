@@ -52,7 +52,7 @@ _Window = _Linoria.Library:CreateWindow({
     TabPadding = 8,
     MenuFadeTime = 0.2
     --Position = float (optional)
-    Size = 600
+    --Size = 600
 })
 
 local function cleanGameName(name)
