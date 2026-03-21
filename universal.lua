@@ -61,6 +61,7 @@ end
 
 local function startFly()
     if flying then return end
+    if not _LocalRoot or not _LocalHumanoid then return end
     flying = true
     bodyVel = Instance.new("BodyVelocity")
     bodyVel.MaxForce, bodyVel.Velocity, bodyVel.Parent = Vector3.new(1e6,1e6,1e6), Vector3.zero, _LocalRoot
@@ -71,10 +72,14 @@ end
 
 local function stopFly()
     flying = false
-    if bodyVel then bodyVel:Destroy() end
-    if bodyGyro then bodyGyro:Destroy() end
-    pcall(setNoclip, false)
-    if _LocalHumanoid then _LocalHumanoid.PlatformStand = false end
+    pcall(function()
+        if bodyVel then bodyVel:Destroy() end
+        if bodyGyro then bodyGyro:Destroy() end
+        if _LocalCharacter then setNoclip(false) end
+        if _LocalHumanoid then _LocalHumanoid.PlatformStand = false end
+    end)
+    bodyVel = nil
+    bodyGyro = nil
 end
 
 _RunService.RenderStepped:Connect(function()
