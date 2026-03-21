@@ -73,7 +73,7 @@ local function stopFly()
     flying = false
     if bodyVel then bodyVel:Destroy() end
     if bodyGyro then bodyGyro:Destroy() end
-    if _LocalCharacter then setNoclip(false) end
+    pcall(setNoclip, false)
     if _LocalHumanoid then _LocalHumanoid.PlatformStand = false end
 end
 

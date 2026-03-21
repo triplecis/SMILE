@@ -12,4 +12,5 @@ This will take forever. (139 Minigames)
 ☀️🎃❄️ (Seasonal) Collection Contention
 ❌ (Removed) Blimp Race • Bombastic Bash • Easter Ice Thaw • Red, Green, Blend
 
+Need detecting current minigame for autofarm
 ]]--
