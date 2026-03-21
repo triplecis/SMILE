@@ -3,7 +3,7 @@ print('Universal module loaded')
 --[[ Groupboxes ]]--
 local UniversalMovement = _Tabs.Universal:AddLeftGroupbox('Movement')
 local UniversalUtilities = _Tabs.Universal:AddLeftGroupbox('Utilities')
-local UniversalCamera = _Tabs.Universal:AddLeftGroupbox('Camera')
+local UniversalCamera = _Tabs.Universal:AddRightGroupbox('Camera')
 local UniversalWorld = _Tabs.Universal:AddRightGroupbox('World')
 local UniversalRender = _Tabs.Universal:AddRightGroupbox('Render')
 
@@ -299,9 +299,10 @@ local function createESP(player)
     ESPObjects[player] = {}
 
     local highlight = Instance.new("Highlight")
-    highlight.FillColor = Color3.fromRGB(255, 0, 0)
+    highlight.FillTransparency = 1        -- no fill, outline only
     highlight.OutlineColor = Color3.fromRGB(255, 255, 255)
-    highlight.FillTransparency = 0.5
+    highlight.OutlineTransparency = 0
+    highlight.DepthMode = Enum.HighlightDepthMode.Occluded -- only shows when visible, not through walls
 
     table.insert(ESPObjects[player], highlight)
 
@@ -345,7 +346,7 @@ local function createBox(player)
         box.AlwaysOnTop = true
         box.ZIndex = 5
         box.Size = Vector3.new(3.5, 5, 2)
-        box.Offset = CFrame.new(0, 0.5, 0)
+        box.CFrame = CFrame.new(0, 0.5, 0) -- replace Offset with CFrame
         box.Color3 = Color3.fromRGB(255, 0, 0)
         box.Transparency = 0
         box.Parent = game.CoreGui
@@ -835,7 +836,40 @@ UniversalMovement:AddToggle('ClickTP', {
     Default = false
 })
 
+local PlayerDropdown = UniversalMovement:AddDropdown('Playerlist', {
+    Text = 'Player List',
+    Default = nil,
+    AllowNull = true,
+    Values = {},
+    Multi = false,
+})
 
+UniversalMovement:AddButton('Teleport to Player', function()
+    local targetName = Options.Playerlist.Value
+    if not targetName or targetName == "" then return end
+
+    local targetPlayer = _Players:FindFirstChild(targetName)
+    if not targetPlayer then return end
+
+    local hrp = targetPlayer.Character and targetPlayer.Character:FindFirstChild("HumanoidRootPart")
+    if hrp then
+        _LocalRoot.CFrame = hrp.CFrame + hrp.CFrame.LookVector * 3
+    end
+end)
+
+UniversalMovement:AddButton('Spectate Player', function()
+    local targetName = Options.Playerlist.Value
+    if not targetName or targetName == "" then return end
+
+    local targetPlayer = _Players:FindFirstChild(targetName)
+    if not targetPlayer or not targetPlayer.Character then return end
+
+    _CurrentCamera.CameraSubject = targetPlayer.Character:FindFirstChild("Humanoid")
+end)
+
+UniversalMovement:AddButton('Stop Spectating', function()
+    _CurrentCamera.CameraSubject = _LocalHumanoid
+end)
 
 -- Utilities
 UniversalUtilities:AddToggle('ESP', {
@@ -927,41 +961,6 @@ UniversalUtilities:AddToggle('Healthbars', {
         end
     end
 })
-
-local PlayerDropdown = UniversalUtilities:AddDropdown('Playerlist', {
-    Text = 'Player List',
-    Default = nil,
-    AllowNull = true,
-    Values = {},
-    Multi = false,
-})
-
-UniversalUtilities:AddButton('Teleport to Player', function()
-    local targetName = Options.Playerlist.Value
-    if not targetName or targetName == "" then return end
-
-    local targetPlayer = _Players:FindFirstChild(targetName)
-    if not targetPlayer then return end
-
-    local hrp = targetPlayer.Character and targetPlayer.Character:FindFirstChild("HumanoidRootPart")
-    if hrp then
-        _LocalRoot.CFrame = hrp.CFrame + hrp.CFrame.LookVector * 3
-    end
-end)
-
-UniversalUtilities:AddButton('Spectate Player', function()
-    local targetName = Options.Playerlist.Value
-    if not targetName or targetName == "" then return end
-
-    local targetPlayer = _Players:FindFirstChild(targetName)
-    if not targetPlayer or not targetPlayer.Character then return end
-
-    _CurrentCamera.CameraSubject = targetPlayer.Character:FindFirstChild("Humanoid")
-end)
-
-UniversalUtilities:AddButton('Stop Spectating', function()
-    _CurrentCamera.CameraSubject = _LocalHumanoid
-end)
 
 _Players.PlayerAdded:Connect(function()
     task.wait(1)
