@@ -347,14 +347,12 @@ local function createBox(player)
 
         local hrp = character:WaitForChild("HumanoidRootPart")
 
-        local box = Instance.new("BoxHandleAdornment")
+        local box = Instance.new("SelectionBox")
         box.Adornee = hrp
-        box.AlwaysOnTop = true
-        box.ZIndex = 5
-        box.Size = Vector3.new(3.5, 5, 2)
-        box.CFrame = CFrame.new(0, 0.5, 0) -- replace Offset with CFrame
         box.Color3 = Color3.fromRGB(255, 0, 0)
-        box.Transparency = 0
+        box.LineThickness = 0.03
+        box.SurfaceTransparency = 1      -- no fill
+        box.SurfaceColor3 = Color3.fromRGB(255, 0, 0)
         box.Parent = game.CoreGui
 
         table.insert(ESPObjects[player], box)
@@ -749,8 +747,8 @@ UniversalMovement:AddLabel("Vehicle Fly Keybind"):AddKeyPicker("VehicleFlyKey", 
     end
 })
 
-UniversalMovement:AddSlider('Walkspeed', {
-    Text = 'Walkspeed',
+UniversalMovement:AddSlider('WalkSpeed', {
+    Text = 'WalkSpeed',
     Default = 16,
     Min = 0,
     Max = 250,
