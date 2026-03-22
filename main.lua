@@ -46,7 +46,7 @@ _Linoria.ThemeManager:SetFolder('SMILE/themes')
 _Linoria.SaveManager:SetFolder('SMILE/configs')
 
 --[[ Key System ]]--
-local raw = game:HttpGet('https://raw.githubusercontent.com/triplecis/SMILE/refs/heads/main/keySystem.lua' .. '?t=' .. os.time())
+local raw = game:HttpGet('https://raw.githubusercontent.com/triplecis/SMILE/refs/heads/main/keysystem.lua' .. '?t=' .. os.time())
 print('Raw length:', #raw)
 print('Last 50 chars:', raw:sub(-50))
 
@@ -60,7 +60,7 @@ if fn then
     print('Result:', result)
     print('Result type:', type(result))
 end
---[[
+
 if not KeySystem then
     warn('SMILE: Failed to load KeySystem')
     return
@@ -75,7 +75,6 @@ end
 _UserTier = tier
 print('SMILE: Loaded as [' .. tier .. '] user')
 print('SMILE: Loaded as [' .. tier .. '] user')
-]]--
 
 _Window = _Linoria.Library:CreateWindow({
     Title = 'SMILE',
