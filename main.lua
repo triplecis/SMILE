@@ -1,18 +1,5 @@
 print('Executed SMILE at ' .. os.date('%X'))
 
---[[ Key System ]]--
-local KeySystem = loadstring(game:HttpGet('https://raw.githubusercontent.com/triplecis/SMILE/refs/heads/main/keySystem.lua' .. '?t=' .. os.time()))()
-
-local valid, tier = KeySystem:Prompt()
-if not valid then
-    warn('SMILE: Stopping execution')
-    return
-end
-
-
-_UserTier = tier
-print('SMILE: Loaded as [' .. tier .. '] user')
-
 local ok, version = pcall(function()
     return game:HttpGet('https://raw.githubusercontent.com/triplecis/SMILE/refs/heads/main/version.txt' .. '?t=' .. os.time())
 end)
@@ -57,6 +44,23 @@ _Linoria.SaveManager:SetLibrary(_Linoria.Library)
 _Linoria.SaveManager:IgnoreThemeSettings()
 _Linoria.ThemeManager:SetFolder('SMILE/themes')
 _Linoria.SaveManager:SetFolder('SMILE/configs')
+
+--[[ Key System ]]--
+local KeySystem = loadstring(game:HttpGet('https://raw.githubusercontent.com/triplecis/SMILE/refs/heads/main/keySystem.lua' .. '?t=' .. os.time()))()
+
+if not KeySystem then
+    warn('SMILE: Failed to load KeySystem')
+    return
+end
+
+local valid, tier = KeySystem:Prompt()
+if not valid then
+    warn('SMILE: Stopping execution')
+    return
+end
+
+_UserTier = tier
+print('SMILE: Loaded as [' .. tier .. '] user')
 
 _Window = _Linoria.Library:CreateWindow({
     Title = 'SMILE',
