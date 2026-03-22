@@ -46,12 +46,7 @@ _Linoria.ThemeManager:SetFolder('SMILE/themes')
 _Linoria.SaveManager:SetFolder('SMILE/configs')
 
 --[[ Key System ]]--
-local ok, err = pcall(function()
-    loadstring(game:HttpGet('https://raw.githubusercontent.com/triplecis/SMILE/refs/heads/main/keySystem.lua' .. '?t=' .. os.time()))()
-end)
-
-print('KeySystem load ok:', ok)
-print('KeySystem error:', err)
+local KeySystem = loadstring(game:HttpGet('https://raw.githubusercontent.com/triplecis/SMILE/refs/heads/main/keySystem.lua' .. '?t=' .. os.time()))()
 
 if not KeySystem then
     warn('SMILE: Failed to load KeySystem')
@@ -65,6 +60,7 @@ if not valid then
 end
 
 _UserTier = tier
+print('SMILE: Loaded as [' .. tier .. '] user')
 print('SMILE: Loaded as [' .. tier .. '] user')
 
 _Window = _Linoria.Library:CreateWindow({
