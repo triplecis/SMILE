@@ -1,10 +1,10 @@
 print('Refinery Caves 2 module loaded')
 
 --[[ Linoria ]]--
-local GameGroupBox = _Tabs.Game:AddLeftGroupbox('Refinery Caves 2')
+local LeftGroup = _Tabs.Game:AddLeftGroupbox('Refinery Caves 2')
 
 --[[ Linoria UI]]
-GameGroupBox:AddLabel('No game specific features yet, check back later!')
+LeftGroup:AddLabel('No game specific features yet, check back later!')
 
 -- Nothing Yet
 

@@ -25,6 +25,7 @@ _LocalCharacter = _Player.Character or _Player.CharacterAdded:Wait()
 _LocalHumanoid = _LocalCharacter:WaitForChild("Humanoid")
 _LocalRoot = _LocalCharacter:WaitForChild("HumanoidRootPart")
 _Mouse = _Player:GetMouse()
+_Workspace = workspace or Workspace
 
 --[[ Executor / Game Info ]]--
 local Executor = identifyexecutor and identifyexecutor() or "Unknown"
@@ -38,6 +39,9 @@ _Linoria = {
     ThemeManager = loadstring(game:HttpGet('https://raw.githubusercontent.com/violin-suzutsuki/LinoriaLib/main/addons/ThemeManager.lua'))(),
     SaveManager = loadstring(game:HttpGet('https://raw.githubusercontent.com/violin-suzutsuki/LinoriaLib/main/addons/SaveManager.lua'))(),
 }
+local _LINORIASCREENGUI = _Linoria.Library.ScreenGui
+_LINORIASCREENGUI.Name = 'SMILEUI'
+_Linoria.Library:Notify('SMILE', 'Loaded SMILE version ' .. version .. ' on executor: ' .. Executor, 5)
 
 _Linoria.ThemeManager:SetLibrary(_Linoria.Library)
 _Linoria.SaveManager:SetLibrary(_Linoria.Library)
