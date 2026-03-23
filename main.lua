@@ -40,7 +40,7 @@ _Linoria = {
     SaveManager = loadstring(game:HttpGet('https://raw.githubusercontent.com/violin-suzutsuki/LinoriaLib/main/addons/SaveManager.lua'))(),
 }
 local _LINORIASCREENGUI = _Linoria.Library.ScreenGui
-_LINORIASCREENGUI.Name = 'SMILEUI'
+_LINORIASCREENGUI.Name = 'LinoriaUI_SMILE'
 _Linoria.Library:Notify('SMILE', 'Loaded SMILE version ' .. version .. ' on executor: ' .. Executor, 5)
 
 _Linoria.ThemeManager:SetLibrary(_Linoria.Library)
