@@ -12,14 +12,9 @@ local RightGroupAF = _Tabs.Game:AddRightGroupbox('Autofarm')
 
 --[[ Linoria UI]]
 LeftGroup:AddLabel('No real game specific features yet, check back later!')
-LeftGroup:AddButton({
-    Text = 'Paint All',
-    DoubleClick = false,
-    Tooltip = 'Paints all unpainted tiles in the game',
-    Callback = function()
-        print('Paint All button clicked')
-    end
-})
+LeftGroup:AddButton('Paint All', Tooltip = 'Paints all unpainted tiles in the game', function()
+    print('Button clicked!')
+end)
 
 
 
