@@ -122,6 +122,7 @@ local GameModules = {
     [142823291] = 'https://raw.githubusercontent.com/triplecis/SMILE/refs/heads/main/murdermystery2.lua', -- Murder Mystery 2
     [277751860] = 'https://raw.githubusercontent.com/triplecis/SMILE/refs/heads/main/epicminigames.lua', -- Epic Minigames
     [6722921118] = 'https://raw.githubusercontent.com/triplecis/SMILE/refs/heads/main/colorbook.lua', -- Color Book
+    [15092647980] = 'https://raw.githubusercontent.com/triplecis/SMILE/refs/heads/main/projectsmash.lua', -- Project Smash
 }
 
 local hasGameModule = GameModules[PlaceId] ~= nil
