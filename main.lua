@@ -131,6 +131,7 @@ _Tabs = {
     Main = _Window:AddTab('Main'),
     Game = hasGameModule and _Window:AddTab(gameName) or nil,
     Universal = _Window:AddTab('Universal'),
+    PlayersList = _Window:AddTab('PlayersList'),
     Settings = _Window:AddTab('Settings'),
 }
 
@@ -147,9 +148,9 @@ local function loadModule(url)
     end
 end
 
-loadModule('https://raw.githubusercontent.com/triplecis/SMILE/refs/heads/main/universal.lua')
-loadModule('https://raw.githubusercontent.com/triplecis/SMILE/refs/heads/main/settings.lua')
-loadModule('https://raw.githubusercontent.com/triplecis/SMILE/refs/heads/main/characterportrait.lua')
+loadModule('https://raw.githubusercontent.com/triplecis/SMILE/refs/heads/main/universal.lua') -- Universal
+loadModule('https://raw.githubusercontent.com/triplecis/SMILE/refs/heads/main/settings.lua') -- Settings
+loadModule('https://raw.githubusercontent.com/triplecis/SMILE/refs/heads/main/playerslist.lua') -- Players List
 
 if GameModules[PlaceId] then
     loadModule(GameModules[PlaceId])

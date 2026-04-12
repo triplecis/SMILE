@@ -2,7 +2,7 @@ print('Universal module loaded')
 
 --[[ Groupboxes ]]--
 local UniversalMovement = _Tabs.Universal:AddLeftGroupbox('Movement')
-local UniversalUtilities = _Tabs.Universal:AddLeftGroupbox('Utilities')
+local UniversalVisuals = _Tabs.Universal:AddLeftGroupbox('Visuals')
 local UniversalCamera = _Tabs.Universal:AddRightGroupbox('Camera')
 local UniversalWorld = _Tabs.Universal:AddRightGroupbox('World')
 local UniversalRender = _Tabs.Universal:AddRightGroupbox('Render')
@@ -50,7 +50,7 @@ _Player.CharacterAdded:Connect(function()
     getChar()
 end)
 
---[[ Noclip / Fly ]]--
+--[[ Noclip ]]--
 local function setNoclip(state)
     pcall(function()
         if not _LocalCharacter then return end
@@ -62,7 +62,7 @@ local function setNoclip(state)
     end)
 end
 
-
+--[[ Fly ]]--
 local function startFly()
     if flying then return end
     if not _LocalRoot or not _LocalHumanoid then return end
@@ -180,7 +180,7 @@ _RunService.RenderStepped:Connect(function()
         (isDown("S") and -cam.CFrame.LookVector or Vector3.zero) +
         (isDown("A") and -cam.CFrame.RightVector or Vector3.zero) +
         (isDown("D") and cam.CFrame.RightVector or Vector3.zero) +
-        (isDown("Space") and Vector3.yAxis or Vector3.zero) +
+        (isDown("LeftAlt") and Vector3.yAxis or Vector3.zero) +
         (isDown("LeftShift") and -Vector3.yAxis or Vector3.zero)
 
     vehicleVelocity = vehicleVelocity:Lerp(
@@ -750,7 +750,7 @@ UniversalMovement:AddSlider('FlySpeed', {
     Text = 'Flight Speed',
     Default = 60,
     Min = 10,
-    Max = 500,
+    Max = 1000,
     Rounding = 1,
     Compact = true,
     Callback = function(value)
@@ -788,7 +788,7 @@ UniversalMovement:AddSlider('VehicleFlySpeed', {
     Text = 'Vehicle Fly Speed',
     Default = 60,
     Min = 10,
-    Max = 500,
+    Max = 1000,
     Rounding = 1,
     Compact = true,
     Callback = function(value)
@@ -898,7 +898,7 @@ UniversalMovement:AddToggle('ClickTP', {
     Default = false
 })
 
-local PlayerDropdown = UniversalMovement:AddDropdown('Playerlist', {
+local PlayerDropdown = UniversalMovement:AddDropdown('UniversalPlayerlist', {
     Text = 'Player List',
     Default = nil,
     AllowNull = true,
@@ -907,7 +907,7 @@ local PlayerDropdown = UniversalMovement:AddDropdown('Playerlist', {
 })
 
 UniversalMovement:AddButton('Teleport to Player', function()
-    local targetName = Options.Playerlist.Value
+    local targetName = Options.UniversalPlayerlist.Value
     if not targetName or targetName == "" then return end
 
     local targetPlayer = _Players:FindFirstChild(targetName)
@@ -920,7 +920,7 @@ UniversalMovement:AddButton('Teleport to Player', function()
 end)
 
 UniversalMovement:AddButton('Spectate Player', function()
-    local targetName = Options.Playerlist.Value
+    local targetName = Options.UniversalPlayerlist.Value
     if not targetName or targetName == "" then return end
 
     local targetPlayer = _Players:FindFirstChild(targetName)
@@ -934,7 +934,7 @@ UniversalMovement:AddButton('Stop Spectating', function()
 end)
 
 -- Utilities
-UniversalUtilities:AddToggle('ESP', {
+UniversalVisuals:AddToggle('ESP', {
     Text = 'Player ESP',
     Default = false,
     Callback = function(value)
@@ -949,7 +949,7 @@ UniversalUtilities:AddToggle('ESP', {
     end
 })
 
-UniversalUtilities:AddToggle('Boxes', {
+UniversalVisuals:AddToggle('Boxes', {
     Text = 'ESP Boxes',
     Default = false,
     Callback = function(value)
@@ -964,7 +964,7 @@ UniversalUtilities:AddToggle('Boxes', {
     end
 })
 
-UniversalUtilities:AddToggle('Chams', {
+UniversalVisuals:AddToggle('Chams', {
     Text = 'Chams',
     Default = false,
     Callback = function(value)
@@ -979,7 +979,7 @@ UniversalUtilities:AddToggle('Chams', {
     end
 })
 
-UniversalUtilities:AddToggle('Tracers', {
+UniversalVisuals:AddToggle('Tracers', {
     Text = 'Tracers',
     Default = false,
     Callback = function(value)
@@ -994,7 +994,7 @@ UniversalUtilities:AddToggle('Tracers', {
     end
 })
 
-UniversalUtilities:AddToggle('Nametags', {
+UniversalVisuals:AddToggle('Nametags', {
     Text = 'Nametags',
     Default = false,
     Callback = function(value)
@@ -1009,7 +1009,7 @@ UniversalUtilities:AddToggle('Nametags', {
     end
 })
 
-UniversalUtilities:AddToggle('Healthbars', {
+UniversalVisuals:AddToggle('Healthbars', {
     Text = 'Healthbars',
     Default = false,
     Callback = function(value)
