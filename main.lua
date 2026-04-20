@@ -115,14 +115,20 @@ local success, info = pcall(function() return MarketplaceService:GetProductInfo(
 local gameName = success and cleanGameName(info.Name) or 'Game'
 
 local GameModules = {
-    [12196278347] = 'https://raw.githubusercontent.com/triplecis/SMILE/refs/heads/main/refinerycaves2.lua', -- Refinery Caves 2
-    [192800] = 'https://raw.githubusercontent.com/triplecis/SMILE/refs/heads/main/workatapizzaplace.lua', -- Work at a Pizza Place
     [5523851880] = 'https://raw.githubusercontent.com/triplecis/SMILE/refs/heads/main/8ballpoolclassic.lua', -- 8 Ball Pool Classic
-    [2653064683] = 'https://raw.githubusercontent.com/triplecis/SMILE/refs/heads/main/wordbomb.lua', -- Word Bomb
-    [142823291] = 'https://raw.githubusercontent.com/triplecis/SMILE/refs/heads/main/murdermystery2.lua', -- Murder Mystery 2
-    [277751860] = 'https://raw.githubusercontent.com/triplecis/SMILE/refs/heads/main/epicminigames.lua', -- Epic Minigames
     [6722921118] = 'https://raw.githubusercontent.com/triplecis/SMILE/refs/heads/main/colorbook.lua', -- Color Book
+    [277751860] = 'https://raw.githubusercontent.com/triplecis/SMILE/refs/heads/main/epicminigames.lua', -- Epic Minigames
+    [16732694052] = 'https://raw.githubusercontent.com/triplecis/SMILE/refs/heads/main/fisch.lua', -- Fisch
+    [893973440] = 'https://raw.githubusercontent.com/triplecis/SMILE/refs/heads/main/fleethefacility.lua', -- Flee the Facility
+    [621129760] = 'https://raw.githubusercontent.com/triplecis/SMILE/refs/heads/main/kat.lua', -- Kat [ORIGINAL] by Fierzaa
+    [111163066268338] = 'https://raw.githubusercontent.com/triplecis/SMILE/refs/heads/main/katOffbrand.lua', -- Kat [CHUD] by Murder Mystery Franchise
+    [142823291] = 'https://raw.githubusercontent.com/triplecis/SMILE/refs/heads/main/murdermystery2.lua', -- Murder Mystery 2
     [15092647980] = 'https://raw.githubusercontent.com/triplecis/SMILE/refs/heads/main/projectsmash.lua', -- Project Smash
+    [12196278347] = 'https://raw.githubusercontent.com/triplecis/SMILE/refs/heads/main/refinerycaves2.lua', -- Refinery Caves 2
+    [11379739543] = 'https://raw.githubusercontent.com/triplecis/SMILE/refs/heads/main/timebombduels.lua', -- Timebomb Duels
+    [2653064683] = 'https://raw.githubusercontent.com/triplecis/SMILE/refs/heads/main/wordbomb.lua', -- Word Bomb
+    [192800] = 'https://raw.githubusercontent.com/triplecis/SMILE/refs/heads/main/workatapizzaplace.lua', -- Work at a Pizza Place
+    
 }
 
 local hasGameModule = GameModules[PlaceId] ~= nil

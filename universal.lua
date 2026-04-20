@@ -1,7 +1,6 @@
-print('Universal module loaded')
-
 --[[ Groupboxes ]]--
-local UniversalMovement = _Tabs.Universal:AddLeftGroupbox('Movement')
+local UniversalPlayer = _Tabs.Universal:AddLeftGroupbox('Player')
+local UniversalVehicle = _Tabs.Universal:AddRightGroupbox('Vehicle')
 local UniversalVisuals = _Tabs.Universal:AddLeftGroupbox('Visuals')
 local UniversalCamera = _Tabs.Universal:AddRightGroupbox('Camera')
 local UniversalWorld = _Tabs.Universal:AddRightGroupbox('World')
@@ -738,7 +737,7 @@ end
 --[[ Linoria UI ]]--
 
 -- Movement
-UniversalMovement:AddToggle('FlyToggle', {
+UniversalPlayer:AddToggle('FlyToggle', {
     Text = 'Flight',
     Tooltip = 'Toggle Flight',
     Callback = function(value)
@@ -746,7 +745,7 @@ UniversalMovement:AddToggle('FlyToggle', {
     end
 })
 
-UniversalMovement:AddSlider('FlySpeed', {
+UniversalPlayer:AddSlider('FlySpeed', {
     Text = 'Flight Speed',
     Default = 60,
     Min = 10,
@@ -758,7 +757,7 @@ UniversalMovement:AddSlider('FlySpeed', {
     end
 })
 
-UniversalMovement:AddLabel("Fly Keybind"):AddKeyPicker("FlyKey", {
+UniversalPlayer:AddLabel("Fly Keybind"):AddKeyPicker("FlyKey", {
     Default = "",
     Mode = "Toggle",
     Text = "Fly Key",
@@ -767,7 +766,7 @@ UniversalMovement:AddLabel("Fly Keybind"):AddKeyPicker("FlyKey", {
     end
 })
 
-UniversalMovement:AddToggle('VehicleFlyToggle', {
+UniversalVehicle:AddToggle('VehicleFlyToggle', {
     Text = 'Vehicle Fly',
     Tooltip = 'Must be seated in a vehicle.',
     Default = false,
@@ -784,7 +783,7 @@ UniversalMovement:AddToggle('VehicleFlyToggle', {
     end
 })
 
-UniversalMovement:AddSlider('VehicleFlySpeed', {
+UniversalVehicle:AddSlider('VehicleFlySpeed', {
     Text = 'Vehicle Fly Speed',
     Default = 60,
     Min = 10,
@@ -796,7 +795,7 @@ UniversalMovement:AddSlider('VehicleFlySpeed', {
     end
 })
 
-UniversalMovement:AddLabel("Vehicle Fly Keybind"):AddKeyPicker("VehicleFlyKey", {
+UniversalVehicle:AddLabel("Vehicle Fly Keybind"):AddKeyPicker("VehicleFlyKey", {
     Default = "",
     Mode = "Toggle",
     Text = "Vehicle Fly Key",
