@@ -14,6 +14,9 @@ SettingsMenu:AddLabel("Menu keybind"):AddKeyPicker("MenuKeybind", {
 SettingsMenu:AddButton('Close UI', function()
     _Linoria.Library:Unload()
 end)
+SettingsMenu:AddButton('Rejoin', function()
+    game:GetService("TeleportService"):Teleport(game.PlaceId, game.Players.LocalPlayer)
+end)
 
 --[[ Discord ]]--
 SettingsDiscord:AddButton("Copy Discord", function()
