@@ -1,3 +1,3 @@
 # Silveria 
 
-using LinoriaUI.
+Silveria is a passion project using LinoriaUI.
