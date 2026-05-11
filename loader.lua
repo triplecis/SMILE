@@ -48,7 +48,7 @@ _Window = _Linoria.Library:CreateWindow({
     Center = true,
     AutoShow = true,
     TabPadding = 8,
-    MenuFadeTime = 0.2
+    MenuFadeTime = 0.2,
     --Position = float (optional)
     --Size = 600
 })
@@ -91,7 +91,7 @@ local _GameModules = {
     
 }
 
-local hasGameModule = _GameModules[PlaceId] ~= nil
+local hasGameModule = GameModules[PlaceId] ~= nil
 
 _Tabs = {
     Home = _Window:AddTab('Main'),
@@ -120,8 +120,8 @@ loadModule('https://raw.githubusercontent.com/triplecis/Silveria/refs/heads/main
 --loadModule('https://raw.githubusercontent.com/triplecis/Silveria/refs/heads/main/control.lua') -- Control
 loadModule('https://raw.githubusercontent.com/triplecis/Silveria/refs/heads/main/game.lua') -- Game
 
-if _GameModules[_PlaceId] then
-    loadModule(_GameModules[_PlaceId])
+if GameModules[PlaceId] then
+    loadModule(GameModules[PlaceId])
 else
     print('No specific module for this game, universal only.')
 end
